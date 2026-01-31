@@ -1,0 +1,41 @@
+id,conditions,conclusion,explanation
+R1,sleep_hours<4,driver_fatigue=yes,Sleep deprivation indicates dangerous fatigue
+R2,eyes_red==yes,driver_fatigue=yes,Red or droopy eyes indicate tiredness
+R3,felt_sleepy==yes,driver_fatigue=yes,Driver reports feeling drowsy
+R4,medication_drowsy==yes,driver_fatigue=yes,Medication may reduce alertness
+R5,yesterday_drive>6,driver_fatigue=yes,Previous long driving increases fatigue
+R6,night_drive==yes,driver_fatigue=yes,Night driving reduces alertness
+R7,caffeine_last2h==no,driver_fatigue=maybe,No recent caffeine may reduce alertness
+R8,oil_level<25,car_risk=high,Low oil increases engine damage risk
+R9,water_level<30,car_risk=medium,Low coolant increases overheating risk
+R10,engine_temp>95,car_risk=high,High temperature indicates overheating
+R11,tire_condition==worn,car_risk=medium,Bad tire pressure/condition affects safety
+R12,brakes_noise==yes,car_risk=high,Brake noise indicates brake issues
+R13,fuel_level<15,car_risk=low,Low fuel can cause unexpected stops
+R14,km_since_oil>8000,car_risk=low,Oil change overdue
+R15,weather==rain,external_risk=medium,Rain reduces visibility
+R16,weather==fog,external_risk=high,Fog severely reduces visibility
+R17,weather==wind,external_risk=low,Wind can affect stability
+R18,road_type==mountain,external_risk=medium,Curvy roads increase danger
+R19,road_type==bad,external_risk=medium,Damaged road increases risk
+R20,road_wet==yes,external_risk=medium,Wet roads reduce traction
+R21,traffic==heavy,external_risk=low,High traffic increases attention needs
+R22,roadworks==yes,external_risk=low,Road work requires caution
+R23,distance_km>150,external_risk=medium,Long distances increase fatigue
+R24,fuel_stations_low==yes,external_risk=low,Low station availability increases risk
+R25,phone_usage==yes,driver_risk=high,Using phone increases distraction
+R26,screen_usage==yes,driver_risk=medium,Screen usage reduces focus
+R27,driver_age>60,driver_risk=medium,Older drivers may have slower reactions
+R28,vision_quality==poor,driver_risk=medium,Poor vision reduces safety
+R29,stress==yes,driver_risk=low,Stress affects focus
+R30,last_meal>5,driver_risk=low,Long time without food reduces energy
+R31,driver_fatigue==yes AND driver_risk==high,global_risk=high,Fatigue + distraction = high danger
+R32,car_risk==high AND external_risk==high,global_risk=critical,Severe mechanical + external danger
+R33,driver_fatigue==yes AND external_risk==medium,global_risk=medium,Fatigue + bad weather
+R34,car_risk==medium AND driver_risk==medium,global_risk=medium,Driver + car risk combined
+R35,driver_fatigue==maybe AND external_risk==high,global_risk=high,High external risk + possible fatigue
+R36,global_risk==critical,final_risk=CRITICAL,Critical conditions detected
+R37,global_risk==high,final_risk=HIGH,High danger identified
+R38,global_risk==medium,final_risk=MEDIUM,Medium risk level
+R39,global_risk==low,final_risk=LOW,Low risk detected
+R40,driver_fatigue==no AND car_risk==low AND external_risk==low,final_risk=LOW,All conditions safe

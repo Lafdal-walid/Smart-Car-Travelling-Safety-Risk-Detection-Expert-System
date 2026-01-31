@@ -1,0 +1,36 @@
+id,conditions,conclusion,explanation
+RR1,final_risk==CRITICAL,recommendation=DO_NOT_DRIVE,Conditions unsafe to operate a vehicle
+RR2,final_risk==HIGH,recommendation=STOP_NOW,Driver should immediately stop
+RR3,final_risk==MEDIUM,recommendation=DRIVE_WITH_CAUTION,Moderate danger detected
+RR4,final_risk==LOW,recommendation=SAFE_TO_DRIVE,Conditions normal and safe
+RR5,driver_fatigue==yes,recommendation=REST_20_MIN,Driver needs rest
+RR6,felt_sleepy==yes,recommendation=IMMEDIATE_STOP,Drowsiness during driving is dangerous
+RR7,sleep_hours<4,recommendation=REST_BEFORE_DRIVING,Insufficient sleep
+RR8,last_meal>5,recommendation=EAT_SNACK,Low energy affects alertness
+RR9,driver_age>60,recommendation=KEEP_LOW_SPEED,Older drivers take precautions
+RR10,vision_quality==poor,recommendation=CHECK_EYES,Vision affects safety
+RR11,engine_temp>95,recommendation=STOP_AND_COOL_ENGINE,Prevent engine damage
+RR12,oil_level<25,recommendation=ADD_OIL,Low oil must be corrected
+RR13,km_since_oil>8000,recommendation=SCHEDULE_OIL_CHANGE,Maintenance required
+RR14,brakes_noise==yes,recommendation=CHECK_BRAKES,Brake inspection needed
+RR15,tire_condition==worn,recommendation=FILL_TIRES,Correct tire pressure
+RR16,fuel_level<15,recommendation=REFUEL_SOON,Low fuel
+RR17,weather==rain,recommendation=REDUCE_SPEED,Wet weather requires slower driving
+RR18,weather==fog,recommendation=USE_FOG_LIGHTS,Fog requires extra safety
+RR19,weather==wind,recommendation=TWO_HANDS_ON_WHEEL,Wind affects steering
+RR20,road_type==mountain,recommendation=LOW_GEAR,Use low gear in mountains
+RR21,road_type==bad,recommendation=DRIVE_SLOW,Bad roads require caution
+RR22,road_wet==yes,recommendation=KEEP_DISTANCE,Wet roads increase stopping distance
+RR23,traffic==heavy,recommendation=STAY_ALERT,Crowded traffic requires attention
+RR24,roadworks==yes,recommendation=FOLLOW_SIGNS,Obey construction signs
+RR25,phone_usage==yes,recommendation=STOP_PHONE_USE,Eliminate distraction
+RR26,screen_usage==yes,recommendation=AVOID_SCREEN,Reduce visual distraction
+RR27,stress==yes,recommendation=BREATHING_PAUSE,Stress relief recommended
+RR28,fuel_stations_low==yes,recommendation=PLAN_REFUEL_STOPS,Long trip planning needed
+RR29,distance_km>150,recommendation=TAKE_BREAKS,Long driving requires pauses
+RR30,night_drive==yes,recommendation=INCREASE_ALERTNESS,Night visibility low
+RR31,brakes_noise==yes AND car_risk==high,recommendation=VISIT_MECHANIC,Critical mechanical issue
+RR32,driver_fatigue==yes AND external_risk==high,recommendation=STOP_IMMEDIATELY,High external danger + fatigue
+RR33,car_risk==high AND weather==rain,recommendation=AVOID_TRAVEL,Mechanical + weather risk
+RR34,final_risk==MEDIUM AND driver_fatigue==maybe,recommendation=SHORT_BREAK,Small rest needed
+RR35,final_risk==LOW AND car_risk==low,recommendation=ENJOY_YOUR_TRIP,Everything normal

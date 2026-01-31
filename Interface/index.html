@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تقييم مخاطر القيادة</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="header-car">🚗</span> نظام تقييم مخاطر القيادة</h1>
+            <p>أدخل المعاملات للحصول على مستوى المخاطر والتوصيات</p>
+        </div>
+
+        <div class="content">
+            <div class="cards-row">
+                <div class="small-card external-card" onclick="openModal('external')" role="button" tabindex="0">
+                    <span class="small-card-icon">🌍</span>
+                    <h2 class="small-card-title">حقائق خارجية</h2>
+                    <p class="small-card-hint">اضغط للإدخال</p>
+                </div>
+                <div class="small-card driver-card" onclick="openModal('human')" role="button" tabindex="0">
+                    <span class="small-card-icon">👤</span>
+                    <h2 class="small-card-title">حقائق السائق</h2>
+                    <p class="small-card-hint">اضغط للإدخال</p>
+                </div>
+                <div class="small-card car-card" onclick="openModal('car')" role="button" tabindex="0">
+                    <span class="small-card-icon">🚗</span>
+                    <h2 class="small-card-title">حقائق السيارة</h2>
+                    <p class="small-card-hint">اضغط للإدخال</p>
+                </div>
+            </div>
+
+            <button type="button" class="assess-btn-main" onclick="generateAssessment()">
+                <span class="assess-btn-icon">🔍</span>
+                نتائج التقييم
+            </button>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>جاري تحليل البيانات...</p>
+            </div>
+
+            <div class="results-card" id="results">
+                <div class="results-inner">
+                    <div class="risk-level risk-low" id="riskLevel">
+                    <div class="risk-row">
+                        <div class="risk-label-wrap">
+                            <span class="risk-check-icon">✓</span>
+                            <h2 class="risk-label">مستوى المخاطر: <span id="riskValue">منخفض</span></h2>
+                        </div>
+                        <div class="risk-bar-wrap">
+                            <div class="risk-bar" id="riskBar">
+                                <span class="risk-bar-fill risk-low" id="riskBarFill"></span>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="results-grid">
+                        <div class="recommendation-box">
+                            <h3 class="results-subtitle"><span class="leaf-icon">🌿</span> التوصية</h3>
+                            <p id="recommendationText">يمكنك متابعة القيادة بحذر. الحالة مقبولة.</p>
+                        </div>
+                        <div class="precaution-box">
+                            <span class="bell-icon">🔔</span>
+                            <p class="precaution-text">يمكنك متابعة القيادة مع الحذر.</p>
+                        </div>
+                    </div>
+                    <div class="explanations-box">
+                        <h3 class="results-subtitle"><span class="clipboard-icon">📋</span> الشرح</h3>
+                        <ul id="explanationsList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: حقائق خارجية -->
+    <div id="externalModal" class="modal" onclick="if(event.target===this) closeModal('external')">
+        <div class="modal-content">
+            <div class="modal-header external">
+                <h2 class="modal-title">🌍 حقائق خارجية</h2>
+                <button type="button" class="modal-close" onclick="closeModal('external')" aria-label="إغلاق">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="weather">الطقس</label>
+                    <select id="weather">
+                        <option value="">اختر...</option>
+                        <option value="clear">صافي</option>
+                        <option value="rain">مطر</option>
+                        <option value="fog">ضباب</option>
+                        <option value="wind">رياح</option>
+                        <option value="snow">ثلج</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="road_type">نوع الطريق</label>
+                    <select id="road_type">
+                        <option value="">اختر...</option>
+                        <option value="highway">طريق سريع</option>
+                        <option value="city">مدينة</option>
+                        <option value="mountain">جبلي</option>
+                        <option value="bad">سيء</option>
+                        <option value="rural">ريفي</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="traffic_density">كثافة المرور</label>
+                    <select id="traffic_density">
+                        <option value="">اختر...</option>
+                        <option value="low">منخفضة</option>
+                        <option value="medium">متوسطة</option>
+                        <option value="high">عالية</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="time_of_day">وقت اليوم</label>
+                    <select id="time_of_day">
+                        <option value="">اختر...</option>
+                        <option value="morning">صباح</option>
+                        <option value="afternoon">بعد الظهر</option>
+                        <option value="evening">مساء</option>
+                        <option value="night">ليل</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: حقائق السائق -->
+    <div id="humanModal" class="modal" onclick="if(event.target===this) closeModal('human')">
+        <div class="modal-content">
+            <div class="modal-header human">
+                <h2 class="modal-title">👤 حقائق السائق</h2>
+                <button type="button" class="modal-close" onclick="closeModal('human')" aria-label="إغلاق">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="driver_age">عمر السائق</label>
+                    <input type="number" id="driver_age" min="16" max="100" value="30" placeholder="30">
+                </div>
+                <div class="form-group">
+                    <label for="vision_quality">جودة الرؤية</label>
+                    <select id="vision_quality">
+                        <option value="">اختر...</option>
+                        <option value="good">جيدة</option>
+                        <option value="medium">متوسطة</option>
+                        <option value="poor">ضعيفة</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="sleep_hours">ساعات النوم</label>
+                    <input type="number" id="sleep_hours" min="0" max="24" step="0.5" placeholder="مثال: 7" value="">
+                </div>
+                <div class="form-group">
+                    <label for="eyes_red">احمرار العيون</label>
+                    <select id="eyes_red">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="felt_sleepy">شعور بالنعاس</label>
+                    <select id="felt_sleepy">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="medication_drowsy">أدوية تسبب النعاس</label>
+                    <select id="medication_drowsy">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phone_usage">استخدام الهاتف</label>
+                    <select id="phone_usage">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="yesterday_drive">ساعات القيادة بالأمس</label>
+                    <input type="number" id="yesterday_drive" min="0" max="24" step="0.5" placeholder="مثال: 4" value="">
+                </div>
+                <div class="form-group">
+                    <label for="night_drive">قيادة ليلية</label>
+                    <select id="night_drive">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="caffeine_last2h">كافيين في الساعتين الماضيتين</label>
+                    <select id="caffeine_last2h">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: حقائق السيارة -->
+    <div id="carModal" class="modal" onclick="if(event.target===this) closeModal('car')">
+        <div class="modal-content">
+            <div class="modal-header car">
+                <h2 class="modal-title">🚗 حقائق السيارة</h2>
+                <button type="button" class="modal-close" onclick="closeModal('car')" aria-label="إغلاق">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="oil_level">مستوى الزيت (%)</label>
+                    <input type="number" id="oil_level" min="0" max="100" value="100" placeholder="100">
+                </div>
+                <div class="form-group">
+                    <label for="water_level">مستوى الماء (%)</label>
+                    <input type="number" id="water_level" min="0" max="100" placeholder="0-100">
+                </div>
+                <div class="form-group">
+                    <label for="engine_temp">درجة حرارة المحرك (C°)</label>
+                    <input type="number" id="engine_temp" min="0" max="150" value="90" placeholder="90">
+                </div>
+                <div class="form-group">
+                    <label for="tire_condition">حالة الإطارات</label>
+                    <select id="tire_condition">
+                        <option value="">اختر...</option>
+                        <option value="good">جيدة</option>
+                        <option value="worn">متآكلة</option>
+                        <option value="bad">سيئة</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="brakes_noise">ضوضاء الفرامل</label>
+                    <select id="brakes_noise">
+                        <option value="">اختر...</option>
+                        <option value="no">لا</option>
+                        <option value="yes">نعم</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="fuel_level">مستوى الوقود (%)</label>
+                    <input type="number" id="fuel_level" min="0" max="100" placeholder="0-100" value="">
+                </div>
+                <div class="form-group">
+                    <label for="km_since_oil">الكيلومترات منذ تغيير الزيت</label>
+                    <input type="number" id="km_since_oil" min="0" placeholder="مثال: 5000" value="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
