@@ -25,32 +25,32 @@
     --bg-gradient-1: rgba(88, 28, 135, 0.4);
     --bg-gradient-2: rgba(124, 58, 237, 0.3);
     --bg-gradient-3: rgba(8, 0, 28, 0.2);
-    
+
     /* Glass effect */
     --glass-bg: rgba(255, 255, 255, 0.05);
     --glass-border: rgba(255, 255, 255, 0.1);
     --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    
+
     /* Text colors */
     --text-primary: #f8fafc;
     --text-secondary: rgba(248, 250, 252, 0.7);
     --text-muted: rgba(248, 250, 252, 0.5);
-    
+
     /* Accent colors */
     --accent-purple: #a78bfa;
     --accent-blue: #60a5fa;
     --accent-cyan: #22d3ee;
-    
+
     /* Risk colors */
     --risk-low: #4ade80;
     --risk-medium: #fbbf24;
     --risk-high: #f87171;
-    
+
     /* Card accent gradients */
     --external-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.3) 0%, rgba(37, 99, 235, 0.2) 100%);
     --driver-gradient: linear-gradient(135deg, rgba(251, 146, 60, 0.3) 0%, rgba(234, 88, 12, 0.2) 100%);
     --car-gradient: linear-gradient(135deg, rgba(248, 113, 113, 0.3) 0%, rgba(220, 38, 38, 0.2) 100%);
-    
+
     /* Fonts */
     --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
@@ -107,7 +107,7 @@ html[lang="en"] .small-card-title {
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
         radial-gradient(ellipse at 20% 20%, var(--bg-gradient-1) 0%, transparent 50%),
         radial-gradient(ellipse at 80% 80%, var(--bg-gradient-2) 0%, transparent 50%),
         radial-gradient(ellipse at 50% 50%, var(--bg-gradient-3) 0%, transparent 60%);
@@ -119,9 +119,11 @@ html[lang="en"] .small-card-title {
     0% {
         transform: scale(1) rotate(0deg);
     }
+
     50% {
         transform: scale(1.1) rotate(2deg);
     }
+
     100% {
         transform: scale(1) rotate(-2deg);
     }
@@ -198,10 +200,10 @@ html[lang="en"] .small-card-title {
    Header
    ============================================ */
 .header {
-    background: linear-gradient(135deg, 
-        rgba(139, 92, 246, 0.2) 0%, 
-        rgba(88, 28, 135, 0.3) 50%,
-        rgba(124, 58, 237, 0.2) 100%);
+    background: linear-gradient(135deg,
+            rgba(139, 92, 246, 0.2) 0%,
+            rgba(88, 28, 135, 0.3) 50%,
+            rgba(124, 58, 237, 0.2) 100%);
     padding: 48px 32px;
     text-align: center;
     border-radius: 24px 24px 0 0;
@@ -401,6 +403,7 @@ html[lang="en"] .small-card-title {
         opacity: 0;
         transform: scale(0.9) translateY(-20px);
     }
+
     to {
         opacity: 1;
         transform: scale(1) translateY(0);
@@ -557,8 +560,13 @@ html[lang="en"] .small-card-title {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .loading p {
@@ -587,6 +595,7 @@ html[lang="en"] .small-card-title {
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -657,10 +666,9 @@ html[lang="en"] .small-card-title {
     height: 10px;
     border-radius: 5px;
     overflow: hidden;
-    background: linear-gradient(90deg, var(--risk-high) 0%, var(--risk-medium) 50%, var(--risk-low) 100%);
+    background: rgba(255, 255, 255, 0.1);
     display: flex;
-    justify-content: flex-end;
-    opacity: 0.3;
+    justify-content: flex-start;
 }
 
 .risk-bar-fill {
@@ -671,19 +679,19 @@ html[lang="en"] .small-card-title {
 }
 
 .risk-bar-fill.risk-low {
-    width: 75%;
+    width: 20%;
     background: var(--risk-low);
     box-shadow: 0 0 20px var(--risk-low);
 }
 
 .risk-bar-fill.risk-medium {
-    width: 45%;
+    width: 60%;
     background: var(--risk-medium);
     box-shadow: 0 0 20px var(--risk-medium);
 }
 
 .risk-bar-fill.risk-high {
-    width: 15%;
+    width: 100%;
     background: var(--risk-high);
     box-shadow: 0 0 20px var(--risk-high);
 }
