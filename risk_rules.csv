@@ -36,7 +36,7 @@ R34,driver_risk==high OR car_risk=high OR external_risk=high,final_risk=high,if 
 R35,driver_risk==medium AND car_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
 R36,driver_risk==medium AND external_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
 R37,car_risk==medium AND external_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
-R38,driver_risk==medium OR car_risk==medium OR external_risk=medium,final_risk=medium,if one risk is at medium and the other risks are at low then the final risk is medium
+R38,(driver_risk==medium OR car_risk==medium OR external_risk==medium)AND ( (driver_risk==medium AND car_risk==low AND external_risk==low) OR (driver_risk==low AND car_risk==medium AND external_risk==low) OR (driver_risk==low AND car_risk==low AND external_risk==medium)),final_risk=medium,if one risk is at medium and the other risks are at low then the final risk is medium
 R39,driver_risk==high AND car_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
 R40,driver_risk==high AND external_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
 R41,car_risk==high AND external_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
