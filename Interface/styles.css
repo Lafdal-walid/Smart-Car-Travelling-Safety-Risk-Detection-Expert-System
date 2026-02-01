@@ -55,6 +55,7 @@
     --font-arabic: 'IBM Plex Sans Arabic', sans-serif;
     --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
     --font-headline: 'Monument Extended', 'Bebas Neue', 'Impact', sans-serif;
+    --font-poppins: 'Poppins', sans-serif;
 }
 
 * {
@@ -83,7 +84,8 @@ html[lang="en"] .form-group input,
 html[lang="en"] .form-group select,
 html[lang="en"] p,
 html[lang="en"] span:not(.small-card-icon):not(.assess-btn-icon):not(.risk-check-icon):not(.leaf-icon):not(.bell-icon):not(.clipboard-icon):not(.header-car) {
-    font-family: var(--font-mono);
+    font-family: var(--font-poppins);
+    font-weight: 400;
 }
 
 html[lang="en"] h1,
@@ -92,9 +94,10 @@ html[lang="en"] h3,
 html[lang="en"] .headline,
 html[lang="en"] .modal-title,
 html[lang="en"] .small-card-title {
-    font-family: var(--font-headline);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
+    font-family: var(--font-poppins);
+    font-weight: 700;
+    letter-spacing: normal;
+    text-transform: none;
 }
 
 /* Animated gradient background */
