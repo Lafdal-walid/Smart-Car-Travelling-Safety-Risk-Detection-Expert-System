@@ -1,0 +1,42 @@
+id,conditions,conclusion,explanation
+R1,sleep_hours<4,driver_fatigue=yes,Sleep deprivation indicates dangerous fatigue
+R2,eyes_red==yes,driver_fatigue=yes,Red or droopy eyes indicate tiredness
+R3,felt_sleepy==yes,driver_fatigue=yes,Driver reports feeling drowsy
+R4,medication_drowsy==yes,driver_fatigue=yes,Medication may reduce alertness
+R5,yesterday_drive>6,driver_fatigue=yes,Previous long driving increases fatigue
+R6,night_drive==yes,driver_fatigue=yes,Night driving reduces alertness
+R7,caffeine_last2h==no,driver_fatigue=maybe,No recent caffeine may reduce alertness
+R8,oil_level<25,car_risk=high,Low oil increases engine damage risk
+R9,water_level<30,car_risk=medium,Low coolant increases overheating risk
+R10,engine_temp>95,car_risk=high,High temperature indicates overheating
+R11,tire_condition==worn,car_risk=medium,Bad tire pressure/condition affects safety
+R12,brakes_noise==yes,car_risk=high,Brake noise indicates brake issues
+R13,fuel_level<15,car_risk=low,Low fuel can cause unexpected stops
+R14,km_since_oil>8000,car_risk=low,Oil change overdue
+R15,weather==rain,external_risk=medium,Rain reduces visibility
+R16,weather==fog,external_risk=high,Fog severely reduces visibility
+R17,weather==wind,external_risk=medium,Wind can affect stability
+R18,road_type==mountain,external_risk=medium,Curvy roads increase danger
+R19,road_type==bad,external_risk=medium,Damaged road increases risk
+R20,road_wet==yes,external_risk=medium,Wet roads reduce traction
+R21,traffic==heavy,external_risk=low,High traffic increases attention needs
+R22,roadworks==yes,external_risk=low,Road work requires caution
+R23,distance_km>150,driver_fatigue=yes,Long distances increase fatigue
+R24,fuel_stations_low==yes,external_risk=low,Low station availability increases risk
+R25,phone_usage==yes,driver_risk=high,Using phone increases distraction
+R26,screen_usage==yes,driver_risk=medium,Screen usage reduces focus
+R27,driver_age>60,driver_risk=medium,Older drivers may have slower reactions
+R28,vision_quality==poor,driver_risk=medium,Poor vision reduces safety
+R29,stress==yes,driver_risk=low,Stress affects focus
+R30,last_meal>5,driver_risk=low,Long time without food reduces energy
+R31,driver_fatigue==yes,driver_risk=medium,Fatigue may cause accidents but not always
+R32,driver_fatigue==maybe,driver_risk=low,There is a low risk while driving with some fatigue
+R33,driver_risk==low AND car_risk==low AND external_risk==low,final_risk=low,If there is no major risk then the final risk is low
+R34,driver_risk==high OR car_risk==high OR external_risk==high,final_risk=high,if any of the risks is high then the final risk is high
+R35,driver_risk==medium AND car_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
+R36,driver_risk==medium AND external_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
+R37,car_risk==medium AND external_risk==medium,final_risk=high,if there is 2 medium risks then the final risk is high
+R38,(driver_risk==medium AND car_risk==low AND external_risk==low) OR (driver_risk==low AND car_risk==medium AND external_risk==low) OR (driver_risk==low AND car_risk==low AND external_risk==medium),final_risk=medium,if one risk is at medium and the other risks are at low then the final risk is medium
+R39,driver_risk==high AND car_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
+R40,driver_risk==high AND external_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
+R41,car_risk==high AND external_risk==high,final_risk=critical,if there is 2 high risks then the final risk is critical
